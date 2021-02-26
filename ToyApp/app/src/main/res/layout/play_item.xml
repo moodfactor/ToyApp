@@ -12,13 +12,18 @@
         <variable
             name="toy"
             type="com.example.toyapp.Toy" />
+        
+        <variable
+            name="clickListener"
+            type="com.example.toyapp.ToyAppAdapter.ToyListener" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(toy)}">
 
         <TextView
             android:id="@+id/Title"

@@ -2,14 +2,12 @@ package com.example.toyapp
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toyapp.ToyAppAdapter.ViewHolder
 import com.example.toyapp.databinding.PlayItemBinding
 
-class ToyAppAdapter : androidx.recyclerview.widget.ListAdapter<Toy, ViewHolder>(ToyDiffCallback()) {
+class ToyAppAdapter(val clickListener: ToyListener) : androidx.recyclerview.widget.ListAdapter<Toy, ViewHolder>(ToyDiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,14 +19,18 @@ class ToyAppAdapter : androidx.recyclerview.widget.ListAdapter<Toy, ViewHolder>(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, clickListener)
     }
 
     class ViewHolder(val binding: PlayItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(item: Toy) {
+        fun bind(
+            item: Toy,
+            clickListener: ToyListener
+        ) {
             binding.toy = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
@@ -52,6 +54,11 @@ class ToyAppAdapter : androidx.recyclerview.widget.ListAdapter<Toy, ViewHolder>(
             return oldItem == newItem
         }
 
+    }
+
+    class ToyListener(val clickListener: (toy: Toy) -> Unit){
+
+        fun onClick(toy: Toy)= clickListener(toy)
     }
 
 
