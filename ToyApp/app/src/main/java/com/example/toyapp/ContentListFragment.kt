@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toyapp.database.ToyDatabase
 import com.example.toyapp.databinding.FragmentContentListBinding
@@ -68,8 +68,9 @@ class ContentListFragment : Fragment() {
         Timber.i("inflated view")
 
 
-        val adapter = ToyAppAdapter(ToyAppAdapter.ToyListener { toy ->
-            Toast.makeText(context, toy.title, Toast.LENGTH_SHORT).show()
+        val adapter = ToyAppAdapter(ToyAppAdapter.ToyListener { toyId ->
+            Toast.makeText(context, toyId.toString(), Toast.LENGTH_SHORT).show()
+            viewModel.onToyItemClicked(toyId)
         })
 
         viewModel.toyList.observe(viewLifecycleOwner, Observer {
@@ -79,7 +80,15 @@ class ContentListFragment : Fragment() {
         })
 
         binding.playList.adapter = adapter
+
+        viewModel.navigateToToyDetail.observe(viewLifecycleOwner, Observer { toy ->
+            toy?.let {
+                this.findNavController().navigate(ContentListFragmentDirections.actionContentListFragmentToToyDetailFragment(toy))
+            }
+        })
+
         binding.playList.layoutManager = LinearLayoutManager(context)
+
 
         return binding.root
     }

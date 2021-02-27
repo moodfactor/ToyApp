@@ -18,5 +18,9 @@
         android:id="@+id/toyDetailFragment"
         android:name="com.example.toyapp.ToyDetailFragment"
         android:label="ToyDetailFragment"
-        tools:layout="@layout/fragment_toy_detail"/>
+        tools:layout="@layout/fragment_toy_detail">
+        <argument
+            android:name="toyKey"
+            app:argType="integer" />
+    </fragment>
 </navigation>

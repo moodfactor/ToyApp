@@ -1,15 +1,16 @@
 package com.example.toyapp
 
 import android.app.Application
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.toyapp.database.Toy
 import com.example.toyapp.database.ToyDatabaseDao
 import kotlinx.coroutines.launch
 
 class ContentListViewModel(val database: ToyDatabaseDao, application: Application) : ViewModel() {
+
+    private var _navigateToToyDetail = MutableLiveData<Int>()
+    val navigateToToyDetail
+    get() = _navigateToToyDetail
 
     //ToDo Update the list to get it from database
     var toyList = database.getAllToys()
@@ -30,6 +31,14 @@ class ContentListViewModel(val database: ToyDatabaseDao, application: Applicatio
         return database.getRecentToy()
     }
 
+
+    fun onToyItemClicked(id: Int){
+        _navigateToToyDetail.value = id
+    }
+
+    fun onToyItemNavigated(){
+        _navigateToToyDetail.value = null
+    }
 
 
 }

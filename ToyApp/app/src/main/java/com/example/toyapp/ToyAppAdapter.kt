@@ -57,9 +57,9 @@ class ToyAppAdapter(val clickListener: ToyListener) : androidx.recyclerview.widg
 
     }
 
-    class ToyListener(val clickListener: (toy: Toy) -> Unit){
+    class ToyListener(val clickListener: (toyId: Int) -> Unit){
 
-        fun onClick(toy: Toy)= clickListener(toy)
+        fun onClick(toy: Toy)= clickListener(toy.toyId)
     }
 
 
