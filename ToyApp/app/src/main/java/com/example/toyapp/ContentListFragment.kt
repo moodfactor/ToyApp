@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.toyapp.database.ToyDatabase
 import com.example.toyapp.databinding.FragmentContentListBinding
 import timber.log.Timber
 
@@ -53,17 +55,28 @@ class ContentListFragment : Fragment() {
             false
         )
 
-        viewModel = ViewModelProvider(this).get(ContentListViewModel::class.java)
+        val application = requireNotNull(this.activity).application
+
+        val dataSource = ToyDatabase.getInstance(application).toyDatabaseDao
+
+        val viewModelFactory = ContentListViewModelFactory(dataSource, application)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ContentListViewModel::class.java)
+
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         Timber.i("inflated view")
 
-        binding.lifecycleOwner = this
 
         val adapter = ToyAppAdapter(ToyAppAdapter.ToyListener { toy ->
             Toast.makeText(context, toy.title, Toast.LENGTH_SHORT).show()
         })
 
-        adapter.submitList(viewModel.toyList)
+        viewModel.toyList.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
 
         binding.playList.adapter = adapter
         binding.playList.layoutManager = LinearLayoutManager(context)

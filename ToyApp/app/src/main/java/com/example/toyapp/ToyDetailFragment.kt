@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.toyapp.database.ToyDatabase
 import com.example.toyapp.databinding.FragmentToyDetailBinding
 
 class ToyDetailFragment : Fragment() {
@@ -26,7 +27,7 @@ class ToyDetailFragment : Fragment() {
             false
         )
 
-        viewModel = ViewModelProvider(this).get(ToyDetailViewModel::class.java)
+
 
         return binding.root
     }

@@ -11,7 +11,7 @@
 
         <variable
             name="toy"
-            type="com.example.toyapp.Toy" />
+            type="com.example.toyapp.database.Toy" />
         
         <variable
             name="clickListener"

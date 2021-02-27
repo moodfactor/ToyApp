@@ -3,6 +3,7 @@ package com.example.toyapp
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.example.toyapp.database.Toy
 
 @BindingAdapter("setTitle")
 fun TextView.setTitle(item: Toy){

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toyapp.ToyAppAdapter.ViewHolder
+import com.example.toyapp.database.Toy
 import com.example.toyapp.databinding.PlayItemBinding
 
 class ToyAppAdapter(val clickListener: ToyListener) : androidx.recyclerview.widget.ListAdapter<Toy, ViewHolder>(ToyDiffCallback()) {
