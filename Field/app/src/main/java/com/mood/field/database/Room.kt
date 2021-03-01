@@ -16,22 +16,19 @@ interface MarketDao {
 }
 
 @Database(entities = [DatabaseMarket::class], version = 1)
-abstract class MarketDatabase : RoomDatabase() {
-
+abstract class MarketDatabase: RoomDatabase() {
     abstract val marketDao: MarketDao
+}
 
-    private lateinit var INSTANCE: MarketDatabase
+private lateinit var INSTANCE: MarketDatabase
 
-    fun getDatabase(context: Context): MarketDatabase {
-        synchronized(MarketDatabase::class.java) {
-            if (!::INSTANCE.isInitialized) {
-                INSTANCE = Room.databaseBuilder(
-                    context.applicationContext,
-                    MarketDatabase::class.java,
-                    "marketDB"
-                ).build()
-            }
+fun getDatabase(context: Context): MarketDatabase {
+    synchronized(MarketDatabase::class.java) {
+        if (!::INSTANCE.isInitialized) {
+            INSTANCE = Room.databaseBuilder(context.applicationContext,
+                MarketDatabase::class.java,
+                "markets").build()
         }
-        return INSTANCE
     }
+    return INSTANCE
 }

@@ -11,9 +11,12 @@ import com.mood.field.network.MarketNetwork
 import com.mood.field.network.asDatabaseModel
 import timber.log.Timber
 
-class MarketRepository(val database: MarketDatabase) {
+/**
+ * Repository for fetching devbyte videos from the network and storing them on disk
+ */
+class MarketRepository(private val database: MarketDatabase) {
 
-    val markets : LiveData<List<Market>> = Transformations.map(database.marketDao.getMarket()){
+    val markets: LiveData<List<Market>> = Transformations.map(database.marketDao.getMarket()) {
         it.asDomainModel()
     }
 
@@ -25,9 +28,9 @@ class MarketRepository(val database: MarketDatabase) {
      * function is now safe to call from any thread including the Main thread.
      *
      */
-    suspend fun refreshVideos() {
+    suspend fun refreshMarkets() {
         withContext(Dispatchers.IO) {
-            Timber.d("refresh videos is called");
+            Timber.d("refresh markets is called");
             val marketList = MarketNetwork.markets.getMarketItems()
             database.marketDao.insertAll(marketList.asDatabaseModel())
         }
