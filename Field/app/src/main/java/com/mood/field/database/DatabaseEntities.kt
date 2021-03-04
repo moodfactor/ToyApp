@@ -17,11 +17,11 @@ import com.mood.field.domain.Market
 
 @Entity(tableName = "DatabaseMarket")
 data class DatabaseMarket constructor(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: String,
     val title: String,
     val description: String,
-    val price: Int,
+    val price: String,
     val imgUrl: String
 )
 

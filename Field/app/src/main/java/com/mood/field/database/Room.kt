@@ -12,10 +12,10 @@ interface MarketDao {
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(market: List<DatabaseMarket>)
+    fun insertAll(markets: List<DatabaseMarket>)
 }
 
-@Database(entities = [DatabaseMarket::class], version = 1)
+@Database(entities = [DatabaseMarket::class], version = 2)
 abstract class MarketDatabase: RoomDatabase() {
     abstract val marketDao: MarketDao
 }
@@ -27,7 +27,7 @@ fun getDatabase(context: Context): MarketDatabase {
         if (!::INSTANCE.isInitialized) {
             INSTANCE = Room.databaseBuilder(context.applicationContext,
                 MarketDatabase::class.java,
-                "markets").build()
+                "markets").fallbackToDestructiveMigration().build()
         }
     }
     return INSTANCE
