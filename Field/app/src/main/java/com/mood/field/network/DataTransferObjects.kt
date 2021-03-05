@@ -30,7 +30,7 @@ data class NetworkMarketContainer(val markets: List<NetworkMarket>)
  */
 @JsonClass(generateAdapter = true)
 data class NetworkMarket(
-    val id: String,
+    val id: Int,
     val title: String,
     val description: String,
     val price: String,

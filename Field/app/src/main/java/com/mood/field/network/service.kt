@@ -12,7 +12,7 @@ import retrofit2.http.GET
  * A retrofit service to fetch a market list.
  */
 
-private const val BASE_URL = "https://gist.githubusercontent.com/moodfactor/d14fc3e764d00959090528faa737162e/raw/3842592baacd6855bd05e93cb0e0b565386e5420/"
+private const val BASE_URL = "https://gist.githubusercontent.com/moodfactor/d14fc3e764d00959090528faa737162e/raw/c81b402ec486b0daf47a985eb8d6fade034c66af/"
 
 interface MarketService {
 

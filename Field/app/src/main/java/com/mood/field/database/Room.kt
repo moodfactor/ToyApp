@@ -15,7 +15,7 @@ interface MarketDao {
     fun insertAll(markets: List<DatabaseMarket>)
 }
 
-@Database(entities = [DatabaseMarket::class], version = 2)
+@Database(entities = [DatabaseMarket::class], version = 7, exportSchema = false)
 abstract class MarketDatabase: RoomDatabase() {
     abstract val marketDao: MarketDao
 }

@@ -12,7 +12,7 @@ package com.mood.field.domain
  * Videos represent a devbyte that can be played.
  */
 data class Market(
-    val id: String,
+    val id: Int,
     val title: String,
     val description: String,
     val price: String,

@@ -16,7 +16,7 @@ import timber.log.Timber
  */
 class MarketRepository(private val database: MarketDatabase) {
 
-    val markets: LiveData<List<Market>> = Transformations.map(database.marketDao.getMarket()) {
+    val markets = Transformations.map(database.marketDao.getMarket()) {
         it.asDomainModel()
     }
 

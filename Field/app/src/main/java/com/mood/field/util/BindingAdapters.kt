@@ -2,8 +2,10 @@ package com.mood.field.util
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.mood.field.domain.Market
 
 /**
  * Binding adapter used to hide the spinner once data is available.
@@ -23,4 +25,11 @@ fun hideIfNetworkError(view: View, isNetWorkError: Boolean, playlist: Any?) {
 @BindingAdapter("imageUrl")
 fun setImageUrl(imageView: ImageView, url: String) {
     Glide.with(imageView.context).load(url).into(imageView)
+}
+
+@BindingAdapter("marketIdToString")
+fun TextView.setMarketId(item: Market?) {
+    item?.let {
+        text = item.id.toString()
+    }
 }

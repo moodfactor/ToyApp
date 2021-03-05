@@ -28,7 +28,7 @@ class MarketAdapter(val callback: MarketClick) : ListAdapter<Market, MarketAdapt
         fun bind(item: Market, callback: MarketClick){
             binding.market = item
             binding.marketCallback = callback
-//            binding.executePendingBindings()
+            binding.executePendingBindings()
         }
 
         companion object{
@@ -43,7 +43,7 @@ class MarketAdapter(val callback: MarketClick) : ListAdapter<Market, MarketAdapt
 
     class MarketDiffCallback: DiffUtil.ItemCallback<Market>(){
         override fun areItemsTheSame(oldItem: Market, newItem: Market): Boolean {
-            return oldItem == newItem
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Market, newItem: Market): Boolean {
